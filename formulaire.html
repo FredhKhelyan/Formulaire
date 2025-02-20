@@ -1,0 +1,151 @@
+<style> 
+input[type=text ] {
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid #555;
+    outline: none;
+}
+textarea:focus {
+    background-color: lightblue;
+	}
+input[type=text]:focus {
+    background-color: lightblue;
+}
+</style>
+
+<form name= "f">
+
+<fieldset style="background: #ffffdd ;">
+<legend id="titre" style="background: #ffff88 ;"><b>client</b></legend>
+
+<center><table border="0" cellspacing="0" cellpadding="5" width="100%">
+
+<tr>
+  <td width="17%"><b>civilité</b>
+  <td width="45%">
+	<input type=radio name=civilite value="mademoiselle">mademoiselle
+  	<input type=radio name=civilite value="madame" checked>madame
+	<input type=radio name=civilite value="monsieur">monsieur
+  <td id="t1" width="38%">
+  <input type="text" name="display" size=15 value ="">
+  </td>
+<tr>
+  <td><b>nom / prénom</b>
+  <td>	<input id="c1" type=text name="nom" size=50 maxlength=80 onchange="verifiernom()">
+  <td id="t2"></td>
+<tr>
+  <td><b>adresse</b>
+  <td>	<textarea id="c2" name="adresse" cols=50 rows=2 wrap=physical onchange="verifieradresse()"></textarea>
+  <td id="t3"></td>
+  
+<tr>
+  <td><b>no postal / localité</b>
+  <td>	<input id="c3" type=text name="postal" size=5 maxlength=4 onchange="verifierpostal()">
+	<input  id="c4" type=text name="localite" size=20 maxlength=80 value="">
+<td id="t4"></td>
+<tr>
+  <td><b>pays</b>
+  <td>	<select id="lepays" name=pays>
+ 	  <option>tunisie
+	  <option>algérie
+	  <option selected>maroc
+	</select>
+    <b>     ajouter pays</b>
+	<input id="c5" type=text name=monpays size=20 maxlength=80 value="libye">
+	<button type="button" onclick="myfunction()">ajouter pays</button>
+<td></td>
+
+<tr>
+  <td><b>plateforme(s)</b>
+  <td>	<input type=checkbox name=materiel value="windows" checked>windows     
+	<input type=checkbox name=materiel value="mac" checked>macintosh     
+	<input type=checkbox name=materiel value="unix">unix     
+<td></td>
+<tr>
+  <td><b>applications(s)</b>
+  <td>	<select name=applications size=5 multiple>
+	  <option selected>bureautique
+	  <option>dao
+	  <option>statistiques
+	  <option>sgbd
+	  <option selected>internet
+	</select>
+<td></td>
+</table></center>
+
+</fieldset>
+
+<center><table border="0" cellspacing="0" cellpadding="10" width="95%">
+<tr><th>
+<input type=button value="  soumettre formulaire  " onclick=afficher()>  
+<input type=button value="  vérification formulaire " onclick=forme()>
+<input type=reset value=" effacer ">
+</table></center>
+
+</form>
+
+<script>
+  function verifiernom() {
+    var nom = document.f.nom.value;
+    if (nom.length < 8) {
+      document.getElementById("t2").innerHTML = "nom invalide. Le nom doit etre compris entre 8 et 20 caracteres";
+      document.getElementById("t2").style.color = "red";
+    } else {
+      document.getElementById("t2").innerHTML = "";
+    }
+  }
+
+  function verifieradresse() {
+    var adresse = document.f.adresse.value;
+    if (adresse.length < 20) {
+      document.getElementById("t3").innerHTML = "adresse invalide. L'adresse doit 20 caracteres minimum";
+      document.getElementById("t3").style.color = "red";
+    } else {
+      document.getElementById("t3").innerHTML = "";
+    }
+  }
+ 
+  function verifierpostal() {
+    const postal = document.getElementById("c3").value;
+    const localite = document.getElementById("c4");
+    const message = document.getElementById("t4");
+
+    if (postal === "3000") {
+      localite.value = "Ville 1";
+      message.innerHTML = "";
+    } else if (postal === "4000") {
+      localite.value = "Ville 2";
+      message.innerHTML = "";
+    } else {
+      message.innerHTML = "Erreur, il faut choisir uniquement entre 3000 et 4000";
+      message.style.color = "red";
+      localite.value = "";
+    }
+}
+
+  function myfunction() {
+  var select = document.getElementById("lepays");
+  var newCountry = document.getElementById("c5").value;
+  var exists = false;
+
+  for (var i = 0; i < select.options.length; i++) {
+    if (select.options[i].text === newCountry) {
+      exists = true;
+      break;
+    }
+  }
+
+  if (!exists) {
+    var option = document.createElement("option");
+    option.text = newCountry;
+    select.add(option);
+  } else {
+    alert("Le pays existe déjà dans la liste.");
+  }
+}
+
+function AfficherAlert() {
+  
+}
+</script>
