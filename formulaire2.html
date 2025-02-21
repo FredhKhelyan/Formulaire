@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function addNewSection() {
+        const newSection = document.querySelector('.part1').cloneNode(true);
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.innerText = 'x';
+        removeButton.className = 'ml-2 px-2 py-1 bg-red-500 text-white rounded shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500';
+        removeButton.onclick = function() {
+        form.removeChild(newSection);
+        };
+        newSection.appendChild(removeButton);
+        form.insertBefore(newSection, document.getElementById('addButton'));
+      }
+    </script>
+    <style>
+      .part1 {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 p-8">
+    <form name="f" class="space-y-4">
+      <div class="part1 border border-solid border-black p-4 bg-white rounded shadow-md">
+        <div class="mb-4">
+          <label for="a1" class="block text-sm font-medium text-gray-700">NOM</label>
+          <textarea id="a1" name="name" cols="50" rows="2" wrap="physical" onchange="verifiernom()" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+          <div id="t1" class="text-red-500 text-sm mt-1"></div>
+        </div>
+        <div class="mb-4">
+          <label for="a2" class="block text-sm font-medium text-gray-700">PRENOM</label>
+          <textarea id="a2" name="prenom" cols="50" rows="2" wrap="physical" onchange="verifiernom()" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+          <div id="t2" class="text-red-500 text-sm mt-1"></div>
+        </div>
+      </div>
+      <button type="button" id="addButton" onclick="addNewSection()" class="px-4 py-2 bg-blue-500 text-white rounded shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">+</button>
+      <input type="button" value="Soumettre formulaire" class="px-4 py-2 bg-green-500 text-white rounded shadow-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+    </form>
+  </body>
+</html>
